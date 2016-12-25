@@ -4,42 +4,11 @@ execute pathogen#infect()
 filetype plugin indent on
 syntax on
 
-" set the runtime path to include Vundle and initialize
-"set rtp+=~/.vim/bundle/Vundle.vim
-"call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
-"Plugin 'VundleVim/Vundle.vim'
-
-"Plugin 'kien/ctrlp.vim'
-"Plugin 'mileszs/ack.vim'
-"Plugin 'vim-scripts/a.vim'
-"Plugin 'scrooloose/nerdtree'
-"Plugin 'tpope/vim-fugitive'
-"Plugin 'jeetsukumaran/vim-buffergator'
-"Plugin 'christoomey/vim-tmux-navigator'
-"Plugin 'endel/vim-github-colorscheme'
-"Plugin 'notpratheek/vim-luna'
- 
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-"call vundle#end()            " required
-"filetype plugin on
-"filetype indent on
-
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " =>  General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let mapleader = ","
 let g:mapleader = ","
-
 
 " Set to auto read when a file is changed from the outside
 set autoread
@@ -58,7 +27,6 @@ set noerrorbells
 set novisualbell
 set t_vb=
 set tm=500
-
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -95,6 +63,7 @@ set expandtab
 " 1 tab == 4 spaces
 set shiftwidth=4
 set tabstop=4
+set expandtab
 
 set ai "Auto indent
 set si "Smart indent
@@ -125,11 +94,10 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 nmap <leader>n :NERDTreeToggle<cr>
 
 " use silver searcher
-"if executable('ag')
-"let g:ackprg = 'ag'
-"endif
+if executable('ag')
+   let g:ackprg = 'ag'
+endif
 
-let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 let g:ctrlp_working_path_mode = 'ra'
 
 nmap <leader>m :cn<CR>
@@ -210,7 +178,6 @@ elseif $CSCOPE_DB != ""
     cs add $CSCOPE_DB
 endif
 set csverb  " verbose connection info
-
 
 if &diff
     set cursorline
