@@ -112,23 +112,22 @@ nmap <leader>pt :CtrlPTag<cr>
 
 nnoremap <leader>b <NOP>
 nmap <leader>be :BuffergatorToggle<CR>
-nmap <leader>g  :BuffergatorToggle<CR>
 nmap <leader>bp :bprevious<CR>
 nmap <leader>bn :bnext<CR>
 nmap <leader>bd :bd<CR>
 
-nmap <leader>tn :tabnext<cr>
-nmap <leader>tp :tabprevious<cr>
-nmap <leader>to :tabonly<cr>
 nmap <leader>te :tabnew<cr>
+nmap <leader>tp :tabprevious<cr>
+nmap <leader>tn :tabnext<cr>
 nmap <leader>td :tabclose<cr>
+nmap <leader>to :tabonly<cr>
 
 nmap <leader>sv :source ~/.vimrc<cr>
 nmap <leader>ev :e ~/.vimrc<cr>
 
 nmap <leader>f :Ack! <C-R>=expand("<cword>")<CR><CR>
 
-nmap <leader>a :A<CR>
+nmap <leader>a  :A<CR>
 nmap <leader>av :AV<CR>
 nmap <leader>as :AS<CR>
 map  <leader>cc :botright cope<cr>
@@ -137,6 +136,14 @@ nmap <leader>e :Explore<cr>
 
 nmap <leader>pp :setlocal paste!<cr>
 
+nmap <leader>gs :Gstatus<CR>
+nmap <leader>gd :Gdiff<CR>
+nmap <leader>gc :Gcommit<CR>
+nmap <leader>gb :Gblame<CR>
+nmap <leader>gl :Glog<CR>
+nmap <leader>gp :Git push<CR>
+
+nmap <leader>tt :TagbarToggle<CR>
 
 "cscope
 " :cs find e blah - egrep
@@ -181,11 +188,11 @@ set csverb  " verbose connection info
 
 if &diff
     set cursorline
-    map ] ]c
-    map [ [c
-    map dl :diffget LO<CR>
-    map dr :diffget RE<CR>
-    map du :diffupdate<CR>
+    noremap ] ]c
+    noremap [ [c
+    noremap dl :diffget LO<CR>
+    noremap dr :diffget RE<CR>
+    noremap du :diffupdate<CR>
     "#hi DiffAdd    ctermfg=233 ctermbg=LightGreen guifg=#003300 guibg=#DDFFDD gui=none cterm=none
     "#hi DiffChange ctermbg=white  guibg=#ececec gui=none   cterm=none
     "#hi DiffText   ctermfg=233  ctermbg=yellow  guifg=#000033 guibg=#DDDDFF gui=none cterm=none
