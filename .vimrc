@@ -137,13 +137,43 @@ nmap <leader>e :Explore<cr>
 nmap <leader>pp :setlocal paste!<cr>
 
 nmap <leader>gs :Gstatus<CR>
+" ctrl-n, ctrl-p move up and down 
+" - add/remove file from index ( also works with visual mode)
+" <enter> open file
+" p  git add --patch
+" C  commit
+" :Git add .
+
+" compare working copy with index version
 nmap <leader>gd :Gdiff<CR>
-nmap <leader>gc :Gcommit<CR>
-nmap <leader>gb :Gblame<CR>
-nmap <leader>gl :Glog<CR>
-nmap <leader>gp :Git push<CR>
+" do -> diff obtain
+" dp -> diff put
+
+"git review , staged with head
+command Greview :Git! diff --staged
+nnoremap <leader>gr :Greview<cr>
+
+" edit index version of fiel
+" :Gedit :<filename>
+" :Gedit :0   edit current file
+
+"nmap <leader>gc :Gcommit<CR>
+"nmap <leader>gb :Gblame<CR>
+"nmap <leader>gl :Glog<CR>
+"nmap <leader>gp :Git push<CR>
+
+":Gread<CR>
+" when in working copy <- index file
+" when in index copy <- working copy     
+
+":Gwrite<CR>
+" when in working copy -> index file
+" when in index copy -> working copy     
+
 
 nmap <leader>tt :TagbarToggle<CR>
+
+"<c-n> autocomplete
 
 "cscope
 " :cs find e blah - egrep
@@ -190,9 +220,6 @@ if &diff
     set cursorline
     noremap ] ]c
     noremap [ [c
-    noremap dl :diffget LO<CR>
-    noremap dr :diffget RE<CR>
-    noremap du :diffupdate<CR>
     "#hi DiffAdd    ctermfg=233 ctermbg=LightGreen guifg=#003300 guibg=#DDFFDD gui=none cterm=none
     "#hi DiffChange ctermbg=white  guibg=#ececec gui=none   cterm=none
     "#hi DiffText   ctermfg=233  ctermbg=yellow  guifg=#000033 guibg=#DDDDFF gui=none cterm=none
