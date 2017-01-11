@@ -28,6 +28,7 @@ set novisualbell
 set t_vb=
 set tm=500
 
+let g:solarized_termcolors=256
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => searching
