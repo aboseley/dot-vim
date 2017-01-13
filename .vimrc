@@ -219,6 +219,7 @@ set csverb  " verbose connection info
 
 if &diff
     set cursorline
+    syntax off
     noremap ] ]c
     noremap [ [c
     "#hi DiffAdd    ctermfg=233 ctermbg=LightGreen guifg=#003300 guibg=#DDFFDD gui=none cterm=none
