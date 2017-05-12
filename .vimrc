@@ -2,6 +2,7 @@ set nocompatible              " be iMproved, required
 
 execute pathogen#infect()
 filetype plugin indent on
+set ffs=unix,dos
 syntax on
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
