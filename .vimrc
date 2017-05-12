@@ -99,11 +99,23 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 nmap <leader>n :NERDTreeToggle<cr>
 
 " use silver searcher
+" The Silver Searcher
 if executable('ag')
-   let g:ackprg = 'ag'
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
 endif
 
 let g:ctrlp_working_path_mode = 'ra'
+
+" bind K to grep word under cursor
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+nnoremap <leader>f :grep! <C-R>=expand("<cword>")<CR><CR>
 
 nmap <leader>m :cn<CR>
 nmap <leader><space> :cp<CR>
@@ -130,8 +142,7 @@ nmap <leader>to :tabonly<cr>
 nmap <leader>sv :source ~/.vimrc<cr>
 nmap <leader>ev :e ~/.vimrc<cr>
 
-nmap <leader>f :Ack! <C-R>=expand("<cword>")<CR><CR>
-
+" a.vim switching cpp/header
 nmap <leader>a  :A<CR>
 nmap <leader>av :AV<CR>
 nmap <leader>as :AS<CR>
@@ -139,8 +150,11 @@ map  <leader>cc :botright cope<cr>
 nmap <leader>w :w!<cr>
 nmap <leader>e :Explore<cr>
 
+" paste mode
 nmap <leader>pp :setlocal paste!<cr>
 
+
+" fugitive
 nmap <leader>gs :Gstatus<CR>
 " ctrl-n, ctrl-p move up and down 
 " - add/remove file from index ( also works with visual mode)
@@ -176,6 +190,7 @@ nnoremap <leader>gr :Greview<cr>
 " when in index copy -> working copy     
 
 
+" tag bar
 nmap <leader>tt :TagbarToggle<CR>
 
 "<c-n> autocomplete
@@ -198,7 +213,8 @@ set cscopequickfix=s-,g-,c-,d-,i-,t-,e- " use quick fix window
 set cst     " use cscope for ctrl-] 
 set cspc=3  " display 3 components of file path
 
-set tags+=tags;/
+" look for tags in current folder then go up to root 
+set tags=./tags;/
 
 let g:ackhighlight = 1
 "let g:ack_default_options = " -s --max-count=200 --with-filename --nocolumn --smart-case --follow "
