@@ -189,7 +189,6 @@ nnoremap <leader>gr :Greview<cr>
 " when in working copy -> index file
 " when in index copy -> working copy     
 
-
 " tag bar
 nmap <leader>tt :TagbarToggle<CR>
 
