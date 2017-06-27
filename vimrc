@@ -2,6 +2,7 @@ set nocompatible              " be iMproved, required
 
 execute pathogen#infect()
 filetype plugin indent on
+set ffs=unix,dos
 syntax on
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -98,6 +99,7 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 nmap <leader>n :NERDTreeToggle<cr>
 
 " use silver searcher
+" The Silver Searcher
 if executable('ag')
    let g:ackprg = 'ag'
 
@@ -114,6 +116,10 @@ endif
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 let g:ctrlp_working_path_mode = 'ra'
+
+" bind K to grep word under cursor
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+nnoremap <leader>f :grep! <C-R>=expand("<cword>")<CR><CR>
 
 nmap <leader>m :cn<CR>
 nmap <leader><space> :cp<CR>
@@ -140,6 +146,7 @@ nmap <leader>to :tabonly<cr>
 nmap <leader>sv :source ~/.vimrc<cr>
 nmap <leader>ev :e ~/.vimrc<cr>
 
+" a.vim switching cpp/header
 nmap <leader>a  :A<CR>
 nmap <leader>av :AV<CR>
 nmap <leader>as :AS<CR>
@@ -147,8 +154,11 @@ map  <leader>cc :botright cope<cr>
 nmap <leader>w :w!<cr>
 nmap <leader>e :Explore<cr>
 
+" paste mode
 nmap <leader>pp :setlocal paste!<cr>
 
+
+" fugitive
 nmap <leader>gs :Gstatus<CR>
 " ctrl-n, ctrl-p move up and down 
 " - add/remove file from index ( also works with visual mode)
@@ -183,7 +193,7 @@ nnoremap <leader>gr :Greview<cr>
 " when in working copy -> index file
 " when in index copy -> working copy     
 
-
+" tag bar
 nmap <leader>tt :TagbarToggle<CR>
 
 "<c-n> autocomplete
@@ -206,7 +216,8 @@ set cscopequickfix=s-,g-,c-,d-,i-,t-,e- " use quick fix window
 set cst     " use cscope for ctrl-] 
 set cspc=3  " display 3 components of file path
 
-set tags+=tags;/
+" look for tags in current folder then go up to root 
+set tags=./tags;/
 
 let g:ackhighlight = 1
 "let g:ack_default_options = " -s --max-count=200 --with-filename --nocolumn --smart-case --follow "
