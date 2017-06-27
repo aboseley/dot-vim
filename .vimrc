@@ -100,7 +100,18 @@ nmap <leader>n :NERDTreeToggle<cr>
 " use silver searcher
 if executable('ag')
    let g:ackprg = 'ag'
+
+   " Use ag over grep
+   set grepprg=ag\ --nogroup\ --nocolor
+
+   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+   " ag is fast enough that CtrlP doesn't need to cache
+   let g:ctrlp_use_caching = 0
 endif
+
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 let g:ctrlp_working_path_mode = 'ra'
 
@@ -128,8 +139,6 @@ nmap <leader>to :tabonly<cr>
 
 nmap <leader>sv :source ~/.vimrc<cr>
 nmap <leader>ev :e ~/.vimrc<cr>
-
-nmap <leader>f :Ack! <C-R>=expand("<cword>")<CR><CR>
 
 nmap <leader>a  :A<CR>
 nmap <leader>av :AV<CR>
@@ -254,3 +263,5 @@ nnoremap <F12>     :ShowSpaces 1<CR>
 nnoremap <s-F12>   m`:TrimSpaces<CR>``
 vnoremap <s-F12>   :TrimSpaces<CR>
 
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall
