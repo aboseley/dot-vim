@@ -276,3 +276,5 @@ vnoremap <s-F12>   :TrimSpaces<CR>
 
 let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall
+
+let g:closetag_filenames = "*.html,*.xhtml,*.phtml"
