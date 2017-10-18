@@ -1,5 +1,9 @@
 set nocompatible              " be iMproved, required
 
+" To disable a plugin, add it's bundle name to the following list
+let g:pathogen_disabled = []
+call add(g:pathogen_disabled, 'html5')
+
 execute pathogen#infect()
 filetype plugin indent on
 set ffs=unix,dos
@@ -68,7 +72,7 @@ set tabstop=4
 set expandtab
 
 set ai "Auto indent
-set si "Smart indent
+set smartindent "Smart indent
 set nowrap "Wrap lines
 
 
