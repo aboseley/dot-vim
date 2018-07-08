@@ -147,8 +147,8 @@ nmap <leader>tn :tabnext<cr>
 nmap <leader>td :tabclose<cr>
 nmap <leader>to :tabonly<cr>
 
-nmap <leader>sv :source ~/.vimrc<cr>
-nmap <leader>ev :e ~/.vimrc<cr>
+nmap <leader>sv :source ~/src/vimrc<cr>
+nmap <leader>ev :e ~/src/vimrc<cr>
 
 " a.vim switching cpp/header
 nmap <leader>a  :A<CR>
@@ -199,6 +199,34 @@ nnoremap <leader>gr :Greview<cr>
 
 " tag bar
 nmap <leader>tt :TagbarToggle<CR>
+
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+    \ }
 
 "<c-n> autocomplete
 
