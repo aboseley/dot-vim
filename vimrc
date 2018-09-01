@@ -98,9 +98,9 @@ autocmd BufReadPost *
 set viminfo^=%
 
 " nerdtree
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-nmap <leader>n :NERDTreeToggle<cr>
+"autocmd StdinReadPre * let s:std_in=1
+"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+"nmap <leader>n :NERDTreeToggle<cr>
 
 " use silver searcher
 " The Silver Searcher
@@ -117,17 +117,17 @@ if executable('ag')
    let g:ctrlp_use_caching = 0
 endif
 
-nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 let g:ctrlp_working_path_mode = 'ra'
 
-" bind K to grep word under cursor
-nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+" find it
 nnoremap <leader>f :grep! <C-R>=expand("<cword>")<CR><CR>
 
+" next/previous
 nmap <leader>m :cn<CR>
 nmap <leader><space> :cp<CR>
 
+" ctrlp
 nmap <leader>pb :CtrlPBuffer<cr>
 nmap <leader>pf :CtrlP<cr>
 nmap <leader>pm :CtrlPMixed<cr>
@@ -135,28 +135,36 @@ nmap <leader>ps :CtrlPMRU<cr>
 nmap <leader>pd :CtrlPDir<cr>
 nmap <leader>pt :CtrlPTag<cr>
 
+" buffers
 nnoremap <leader>b <NOP>
 nmap <leader>be :BuffergatorToggle<CR>
-nmap <leader>bp :bprevious<CR>
-nmap <leader>bn :bnext<CR>
+nmap <leader>bp :bp<CR>
+nmap <leader>bn :bn<CR>
 nmap <leader>bd :bd<CR>
 
+" tabs
 nmap <leader>te :tabnew<cr>
 nmap <leader>tp :tabprevious<cr>
 nmap <leader>tn :tabnext<cr>
 nmap <leader>td :tabclose<cr>
 nmap <leader>to :tabonly<cr>
 
-nmap <leader>sv :source ~/.vimrc<cr>
-nmap <leader>ev :e ~/.vimrc<cr>
+" edit new file
+cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<cr>
+" %% expands to the current file directory
+nmap <leader>ee :e.<cr>
+nmap <leader>ew :e %%
+nmap <leader>es :sp %%
+nmap <leader>ev :vsp %%
+nmap <leader>et :tabe %%
 
 " a.vim switching cpp/header
 nmap <leader>a  :A<CR>
 nmap <leader>av :AV<CR>
 nmap <leader>as :AS<CR>
+
 map  <leader>cc :botright cope<cr>
 nmap <leader>w :w!<cr>
-nmap <leader>e :Explore<cr>
 
 " paste mode
 nmap <leader>pp :setlocal paste!<cr>
