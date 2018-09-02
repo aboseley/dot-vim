@@ -32,6 +32,7 @@ set noerrorbells
 set novisualbell
 set t_vb=
 set tm=500
+set fileformat=unix
 
 let g:solarized_termcolors=256
 
@@ -253,6 +254,10 @@ if &diff
     "#hi DiffChange ctermbg=white  guibg=#ececec gui=none   cterm=none
     "#hi DiffText   ctermfg=233  ctermbg=yellow  guifg=#000033 guibg=#DDDDFF gui=none cterm=none
     map Q :cquite<CR>
+    nnoremap 1 :diffget LOCAL<CR>
+    nnoremap 2 :diffget BASE<CR>
+    nnoremap 3 :diffget REMOTE<CR>
+    nnoremap ` :diffupdateg<CR>
 endif
 
 function ShowSpaces(...)

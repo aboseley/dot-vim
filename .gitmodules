@@ -46,3 +46,6 @@
 [submodule "bundle/CountJump"]
 	path = bundle/CountJump
 	url = https://github.com/vim-scripts/CountJump
+[submodule "bundle/vim-ingo-library"]
+	path = bundle/vim-ingo-library
+	url = https://github.com/inkarkat/vim-ingo-library.git
