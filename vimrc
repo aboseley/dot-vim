@@ -100,7 +100,7 @@ set viminfo^=%
 " nerdtree
 "autocmd StdinReadPre * let s:std_in=1
 "autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-"nmap <leader>n :NERDTreeToggle<cr>
+nmap <leader>n :NERDTreeToggle<cr>
 
 " use silver searcher
 " The Silver Searcher
@@ -204,6 +204,17 @@ nnoremap <leader>gr :Greview<cr>
 ":Gwrite<CR>
 " when in working copy -> index file
 " when in index copy -> working copy     
+
+" you complete me
+nnoremap <leader>j  :YcmCompleter GoTo<CR>
+nnoremap <leader>jd :YcmCompleter GoToDeclaration<CR>
+nnoremap <leader>jt :YcmCompleter GetType<CR>
+nnoremap <leader>ji :YcmCompleter GoToImplementation<CR>
+nnoremap <F1> :YcmCompleter FixIt<CR>
+nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
+
+"nnoremap <leader>jr :YcmCompleter GoToReferences<CR>
+"nnoremap <leader>jf :YcmCompleter FixIt<CR>
 
 " tag bar
 nmap <leader>tt :TagbarToggle<CR>
