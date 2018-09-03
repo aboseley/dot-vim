@@ -52,3 +52,6 @@
 [submodule "bundle/ycm"]
 	path = bundle/ycm
 	url = https://github.com/Valloric/YouCompleteMe.git
+[submodule "bundle/vim-ingo-library"]
+	path = bundle/vim-ingo-library
+	url = https://github.com/inkarkat/vim-ingo-library.git
