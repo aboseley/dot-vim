@@ -35,6 +35,7 @@ set tm=500
 set fileformat=unix
 
 let g:solarized_termcolors=256
+colorscheme desert
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => searching
@@ -207,10 +208,10 @@ nnoremap <leader>gr :Greview<cr>
 " when in index copy -> working copy     
 
 " you complete me
-nnoremap <leader>j  :YcmCompleter GoTo<CR>
+nnoremap <leader>jj :YcmCompleter GoTo<CR>
 nnoremap <leader>jd :YcmCompleter GoToDeclaration<CR>
 nnoremap <leader>jt :YcmCompleter GetType<CR>
-nnoremap <leader>ji :YcmCompleter GoToImplementation<CR>
+nnoremap <leader>ji :YcmCompleter GoToDefinition<CR>
 nnoremap <F1> :YcmCompleter FixIt<CR>
 nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
 
@@ -273,7 +274,6 @@ set tags=./tags;/
 
 let g:ackhighlight = 1
 "let g:ack_default_options = " -s --max-count=200 --with-filename --nocolumn --smart-case --follow "
-
 " let g:ackpreview = 1
 nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>	
 nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>	
@@ -297,9 +297,16 @@ if &diff
     syntax off
     noremap ] ]c
     noremap [ [c
-    "#hi DiffAdd    ctermfg=233 ctermbg=LightGreen guifg=#003300 guibg=#DDFFDD gui=none cterm=none
-    "#hi DiffChange ctermbg=white  guibg=#ececec gui=none   cterm=none
-    "#hi DiffText   ctermfg=233  ctermbg=yellow  guifg=#000033 guibg=#DDDDFF gui=none cterm=none
+
+    "highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
+    "#highlight DiffDelete cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
+    "#highlight DiffChange cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
+    "#highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Red
+    "#hi DiffAdd guifg=NONE ctermfg=NONE guibg=#464632 ctermbg=238 gui=NONE cterm=NONE
+    "#hi DiffChange guifg=NONE ctermfg=NONE guibg=#335261 ctermbg=239 gui=NONE cterm=NONE
+    "#hi DiffDelete guifg=#f43753 ctermfg=203 guibg=#79313c ctermbg=237 gui=NONE cterm=NONE
+    "#hi DiffText guifg=NONE ctermfg=NONE guibg=NONE ctermbg=NONE gui=reverse cterm=reverse
+
     map Q :cquite<CR>
     nnoremap 1 :diffget LOCAL<CR>
     nnoremap 2 :diffget BASE<CR>
