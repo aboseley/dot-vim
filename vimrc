@@ -331,6 +331,20 @@ function TrimSpaces() range
   let &hlsearch=oldhlsearch
 endfunction
 
+" Save and make current file.o
+function! Make()
+  let curr_dir = expand('%:h')
+  if curr_dir == ''
+    let curr_dir = '.'
+  endif
+  echo curr_dir
+  execute 'lcd ' . curr_dir
+  execute 'make %:r.o'
+  execute 'lcd -'
+endfunction
+nnoremap <F7> :update<CR>:call Make()<CR>
+
+
 command -bar -nargs=? ShowSpaces call ShowSpaces(<args>)
 command -bar -nargs=0 -range=% TrimSpaces <line1>,<line2>call TrimSpaces()
 nnoremap <F12>     :ShowSpaces 1<CR>
