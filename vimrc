@@ -81,7 +81,7 @@ set nowrap "Wrap lines
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Windows, buffers
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Smart way to move between windows
+" simpler moving between windows
 map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
@@ -99,11 +99,6 @@ autocmd BufReadPost *
 " Remember info about open buffers on close
 set viminfo^=%
 
-" nerdtree
-"autocmd StdinReadPre * let s:std_in=1
-"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-nmap <leader>n :NERDTreeToggle<cr>
-
 " use silver searcher
 " The Silver Searcher
 if executable('ag')
@@ -118,179 +113,6 @@ if executable('ag')
    " ag is fast enough that CtrlP doesn't need to cache
    let g:ctrlp_use_caching = 0
 endif
-
-
-let g:ctrlp_working_path_mode = 'ra'
-
-" find it
-nnoremap <leader>f :grep! <C-R>=expand("<cword>")<CR><CR>
-
-" next/previous
-nmap <leader>m :cn<CR>
-nmap <leader><space> :cp<CR>
-
-" ctrlp
-nmap <leader>pb :CtrlPBuffer<cr>
-nmap <leader>pf :CtrlP<cr>
-nmap <leader>pm :CtrlPMixed<cr>
-nmap <leader>ps :CtrlPMRU<cr>
-nmap <leader>pd :CtrlPDir<cr>
-nmap <leader>pt :CtrlPTag<cr>
-
-" buffers
-nnoremap <leader>b <NOP>
-nmap <leader>be :BuffergatorToggle<CR>
-nmap <leader>bp :bp<CR>
-nmap <leader>bn :bn<CR>
-nmap <leader>bd :bd<CR>
-
-" tabs
-nmap <leader>te :tabnew<cr>
-nmap <leader>tp :tabprevious<cr>
-nmap <leader>tn :tabnext<cr>
-nmap <leader>td :tabclose<cr>
-nmap <leader>to :tabonly<cr>
-
-" edit new file
-cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<cr>
-" %% expands to the current file directory
-nmap <leader>ee :e.<cr>
-nmap <leader>ew :e %%
-nmap <leader>es :sp %%
-nmap <leader>ev :vsp %%
-nmap <leader>et :tabe %%
-
-" a.vim switching cpp/header
-nmap <leader>a  :A<CR>
-nmap <leader>av :AV<CR>
-nmap <leader>as :AS<CR>
-
-map  <leader>cc :botright cope<cr>
-nmap <leader>w :w!<cr>
-
-" paste mode
-nmap <leader>pp :setlocal paste!<cr>
-
-
-" fugitive
-nmap <leader>gs :Gstatus<CR>
-" ctrl-n, ctrl-p move up and down 
-" - add/remove file from index ( also works with visual mode)
-" <enter> open file
-" p  git add --patch
-" C  commit
-" :Git add .
-
-" compare working copy with index version
-nmap <leader>gd :Gdiff<CR>
-" do -> diff obtain
-" dp -> diff put
-
-"git review , staged with head
-command Greview :Git! diff --staged
-nnoremap <leader>gr :Greview<cr>
-
-" edit index version of fiel
-" :Gedit :<filename>
-" :Gedit :0   edit current file
-
-"nmap <leader>gc :Gcommit<CR>
-"nmap <leader>gb :Gblame<CR>
-"nmap <leader>gl :Glog<CR>
-"nmap <leader>gp :Git push<CR>
-
-":Gread<CR>
-" when in working copy <- index file
-" when in index copy <- working copy     
-
-":Gwrite<CR>
-" when in working copy -> index file
-" when in index copy -> working copy     
-
-" you complete me
-nnoremap <leader>jj :YcmCompleter GoTo<CR>
-nnoremap <leader>jd :YcmCompleter GoToDeclaration<CR>
-nnoremap <leader>jt :YcmCompleter GetType<CR>
-nnoremap <leader>ji :YcmCompleter GoToDefinition<CR>
-nnoremap <F1> :YcmCompleter FixIt<CR>
-nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
-
-"nnoremap <leader>jr :YcmCompleter GoToReferences<CR>
-"nnoremap <leader>jf :YcmCompleter FixIt<CR>
-
-" tag bar
-nmap <leader>tt :TagbarToggle<CR>
-
-let g:tagbar_type_go = {
-    \ 'ctagstype' : 'go',
-    \ 'kinds'     : [
-        \ 'p:package',
-        \ 'i:imports:1',
-        \ 'c:constants',
-        \ 'v:variables',
-        \ 't:types',
-        \ 'n:interfaces',
-        \ 'w:fields',
-        \ 'e:embedded',
-        \ 'm:methods',
-        \ 'r:constructor',
-        \ 'f:functions'
-    \ ],
-    \ 'sro' : '.',
-    \ 'kind2scope' : {
-        \ 't' : 'ctype',
-        \ 'n' : 'ntype'
-    \ },
-    \ 'scope2kind' : {
-        \ 'ctype' : 't',
-        \ 'ntype' : 'n'
-    \ },
-    \ 'ctagsbin'  : 'gotags',
-    \ 'ctagsargs' : '-sort -silent'
-    \ }
-
-"<c-n> autocomplete
-
-"cscope
-" :cs find e blah - egrep
-" :cs find t blah - text
-" :cs add cscope.out
-"
-"   's'   symbol: find all references to the token under cursor
-"   'g'   global: find global definition(s) of the token under cursor
-"   'c'   calls:  find all calls to the function name under cursor
-"   't'   text:   find all instances of the text under cursor
-"   'e'   egrep:  egrep search for the word under cursor
-"   'f'   file:   open the filename under cursor
-"   'i'   includes: find files that include the filename under cursor
-"   'd'   called: find functions that function under cursor calls
-set csto=0  " search cscope tags first
-set cscopequickfix=s-,g-,c-,d-,i-,t-,e- " use quick fix window
-set cst     " use cscope for ctrl-] 
-set cspc=3  " display 3 components of file path
-
-" look for tags in current folder then go up to root 
-set tags=./tags;/
-
-let g:ackhighlight = 1
-"let g:ack_default_options = " -s --max-count=200 --with-filename --nocolumn --smart-case --follow "
-" let g:ackpreview = 1
-nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>	
-nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>	
-nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>	
-nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>	
-nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>	
-nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>	
-nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>	
-
-" add any cscope database in current directory
-if filereadable("cscope.out")
-    cs add cscope.out  
-elseif $CSCOPE_DB != ""
-    cs add $CSCOPE_DB
-endif
-set csverb  " verbose connection info
 
 if &diff
     set cursorline
@@ -314,6 +136,9 @@ if &diff
     nnoremap ` :diffupdateg<CR>
 endif
 
+"""""""""""""""""""""""""""""""""
+" functions 
+"""""""""""""""""""""""""""""""""
 function ShowSpaces(...)
   let @/='\v(\s+$)|( +\ze\t)'
   let oldhlsearch=&hlsearch
@@ -342,11 +167,205 @@ function! Make()
   execute 'make %:r.o'
   execute 'lcd -'
 endfunction
-nnoremap <F7> :update<CR>:call Make()<CR>
+
+nnoremap <F4> :AsyncRun g++ -std=c++14 "%" -o "%<"<CR>
+nnoremap <F7> :AsyncRun g++ -std=c++17 "%" -o "%<"<CR>
+
+
+"""""""""""""""""""""""""""
+"
+" leader mapping - 
+"      in alphabetical order
+"
+""""""""""""""""""""""""""
+
+" a.vim switching cpp/header
+nnoremap <leader>a  :A<CR>
+nnoremap <leader>av :AV<CR>
+nnoremap <leader>as :AS<CR>
+
+" buffers gator
+nnoremap <leader>b <NOP>
+nnoremap <leader>be :BuffergatorToggle<CR>
+nnoremap <leader>bp :bp<CR>
+nnoremap <leader>bn :bn<CR>
+nnoremap <leader>bd :bd<CR>
+
+" cc errors in botome windwos 
+nnoremap  <leader>ce :execute "copen \| resize 30" <cr>
+nnoremap  <leader>cd :cclose<cr>
+
+" edit new file
+cnoremap %% <C-R>=expand('%:p:h').'/.'
+" %% expands to the current file directory
+nnoremap <leader>ee :e.<cr>
+nnoremap <leader>ew :e %%<cr>
+nnoremap <leader>es :sp %%<cr>
+nnoremap <leader>ev :vsp %%<cr>
+nnoremap <leader>et :tabe %%<cr>
+
+" find it
+nnoremap <leader>f :grep! <C-R>=expand("<cword>")<CR><CR>
+
+" git - fugitive  
+nnoremap <leader>gs :Gstatus<CR>
+" ctrl-n, ctrl-p move up and down 
+" - add/remove file from index ( also works with visual mode)
+" <enter> open file
+" p  git add --patch
+" C  commit
+" :Git add .
+
+" compare working copy with index version
+nnoremap <leader>gd :Gdiff<CR>
+" do -> diff obtain
+" dp -> diff put
+
+"git review , staged with head
+command Greview :Git! diff --staged
+nnoremap <leader>gr :Greview<cr>
+
+" edit index version of fiel
+" :Gedit :<filename>
+" :Gedit :0   edit current file
+
+"nnoremap <leader>gc :Gcommit<CR>
+"nnoremap <leader>gb :Gblame<CR>
+"nnoremap <leader>gl :Glog<CR>
+"nnoremap <leader>gp :Git push<CR>
+
+":Gread<CR>
+" when in working copy <- index file
+" when in index copy <- working copy     
+
+":Gwrite<CR>
+" when in working copy -> index file
+" when in index copy -> working copy     
+
+
+" you complete me
+nnoremap <leader>jj :YcmCompleter GoTo<CR>
+nnoremap <leader>jd :YcmCompleter GoToDeclaration<CR>
+nnoremap <leader>jt :YcmCompleter GetType<CR>
+nnoremap <leader>ji :YcmCompleter GoToDefinition<CR>
+"nnoremap <leader>jr :YcmCompleter GoToReferences<CR>
+"nnoremap <leader>jf :YcmCompleter FixIt<CR>
+
+" next/previous
+nnoremap <leader>m :cn<CR>
+nnoremap <leader><space> :cp<CR>
+
+" nerdtree
+"autocmd StdinReadPre * let s:std_in=1
+"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+nnoremap <leader>n :NERDTreeToggle<cr>
+
+" paste mode
+nnoremap <leader>pp :setlocal paste!<cr>
+
+" ctrlp
+let g:ctrlp_working_path_mode = 'ra'
+nnoremap <leader>pb :CtrlPBuffer<cr>
+nnoremap <leader>pf :CtrlP<cr>
+nnoremap <leader>pm :CtrlPMixed<cr>
+nnoremap <leader>ps :CtrlPMRU<cr>
+nnoremap <leader>pd :CtrlPDir<cr>
+nnoremap <leader>pt :CtrlPTag<cr>
+
+" tabs
+nnoremap <leader>te :tabnew<cr>
+nnoremap <leader>tp :tabprevious<cr>
+nnoremap <leader>tn :tabnext<cr>
+nnoremap <leader>td :tabclose<cr>
+nnoremap <leader>to :tabonly<cr>
+
+" tag bar
+nnoremap <leader>tt :TagbarToggle<CR>
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+    \ }
+
+" vimrc management
+nnoremap <leader>vs :source ~/.vim/vimrc<CR>
+nnoremap <leader>ve :e ~/.vim/vimrc<CR>
+
+nnoremap <leader>w :w!<cr>
+
+nnoremap <F1> :YcmCompleter FixIt<CR>
+nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>
+
+
+"<c-n> autocomplete
+
+"cscope
+" :cs find e blah - egrep
+" :cs find t blah - text
+" :cs add cscope.out
+"
+"   's'   symbol: find all references to the token under cursor
+"   'g'   global: find global definition(s) of the token under cursor
+"   'c'   calls:  find all calls to the function name under cursor
+"   't'   text:   find all instances of the text under cursor
+"   'e'   egrep:  egrep search for the word under cursor
+"   'f'   file:   open the filename under cursor
+"   'i'   includes: find files that include the filename under cursor
+"   'd'   called: find functions that function under cursor calls
+set csto=0  " search cscope tags first
+set cscopequickfix=s-,g-,c-,d-,i-,t-,e- " use quick fix window
+set cst     " use cscope for ctrl-] 
+set cspc=3  " display 3 components of file path
+
+" look for tags in current folder then go up to root 
+set tags=./tags;/
+
+let g:ackhighlight = 1
+"let g:ack_default_options = " -s --max-count=200 --with-filename --nocolumn --smart-case --follow "
+" let g:ackpreview = 1
+nnoremap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>	
+nnoremap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>	
+nnoremap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>	
+nnoremap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>	
+nnoremap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>	
+nnoremap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>	
+nnoremap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR><CR>
+nnoremap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>	
+
+" add any cscope database in current directory
+if filereadable("cscope.out")
+    cs add cscope.out  
+elseif $CSCOPE_DB != ""
+    cs add $CSCOPE_DB
+endif
+set csverb  " verbose connection info
 
 
 command -bar -nargs=? ShowSpaces call ShowSpaces(<args>)
 command -bar -nargs=0 -range=% TrimSpaces <line1>,<line2>call TrimSpaces()
+
 nnoremap <F12>     :ShowSpaces 1<CR>
 nnoremap <s-F12>   m`:TrimSpaces<CR>``
 vnoremap <s-F12>   :TrimSpaces<CR>

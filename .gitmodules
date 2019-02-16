@@ -58,3 +58,6 @@
 [submodule "bundle/last-place"]
 	path = bundle/last-place
 	url = git://github.com/farmergreg/vim-lastplace.git
+[submodule "bundle/asyncrun"]
+	path = bundle/asyncrun
+	url = https://github.com/skywind3000/asyncrun.vim.git
